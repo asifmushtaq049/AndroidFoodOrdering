@@ -99,7 +99,7 @@ public class OrderListActivity extends BaseCompatActivity {
                         CheckoutAdapter mAdapter = new CheckoutAdapter(OrderListActivity.this, orderHistory);
                         orderRecyclerView.setAdapter(mAdapter);
                     }else{
-                        Toast.makeText(OrderListActivity.this, R.string.failed_login, Toast.LENGTH_LONG).show();
+                        Toast.makeText(OrderListActivity.this, "No Item Exist There!", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

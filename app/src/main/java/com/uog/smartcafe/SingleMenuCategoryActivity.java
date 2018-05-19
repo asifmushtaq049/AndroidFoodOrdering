@@ -84,7 +84,7 @@ public class SingleMenuCategoryActivity extends BaseCompatActivity {
                         SingleCategoryAdapter mAdapter = new SingleCategoryAdapter(SingleMenuCategoryActivity.this, itemObject, R.layout.layout);
                         recyclerView.setAdapter(mAdapter);
                     }else{
-                        Toast.makeText(SingleMenuCategoryActivity.this, "No menu item exist!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SingleMenuCategoryActivity.this, "No Menu Item Exist!", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

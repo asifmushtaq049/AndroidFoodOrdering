@@ -90,7 +90,7 @@ public class FoodActivity extends BaseCompatActivity {
         addToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Helper.displayErrorMessage(FoodActivity.this, "Item successfully added to cart");
+                Helper.displayErrorMessage(FoodActivity.this, "Item Added Successfully to Cart");
                 //create new Cart object and add to cart list object
                 CartObject orderItem = new CartObject(singleMenuItem.getMenu_id(), singleMenuItem.getItem_name(), 1,
                         singleMenuItem.getItem_price(), addedOrderOptions, addedOrderNote);
