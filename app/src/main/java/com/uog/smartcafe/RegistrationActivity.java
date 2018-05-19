@@ -38,7 +38,8 @@ public class RegistrationActivity extends BaseCompatActivity {
     private EditText username;
     private EditText email;
     private EditText password;
-    private EditText address;
+    private EditText department;
+    private EditText semester;
     private EditText phoneNumber;
 
 
@@ -63,7 +64,8 @@ public class RegistrationActivity extends BaseCompatActivity {
         username = (EditText)findViewById(R.id.username);
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
-        address = (EditText)findViewById(R.id.address);
+        department = (EditText)findViewById(R.id.department);
+        semester = (EditText)findViewById(R.id.semester);
         phoneNumber = (EditText)findViewById(R.id.phone_number);
 
         Button createAccountButton = (Button)findViewById(R.id.create_account_button);
@@ -73,24 +75,48 @@ public class RegistrationActivity extends BaseCompatActivity {
                 String enteredUsername = username.getText().toString().trim();
                 String enteredEmail = email.getText().toString().trim();
                 String enteredPassword = password.getText().toString().trim();
-                String enteredAddress = address.getText().toString();
+                String enteredDepartment = department.getText().toString().trim();
+                String enteredSemester = semester.getText().toString().trim();
+                String enteredAddress = enteredDepartment + ", " + enteredSemester ;
                 String enteredPhoneNumber = phoneNumber.getText().toString();
 
-                if(TextUtils.isEmpty(enteredUsername) || TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)
-                        || TextUtils.isEmpty(enteredAddress) || TextUtils.isEmpty(enteredPhoneNumber)){
-                    Helper.displayErrorMessage(RegistrationActivity.this, getString(R.string.fill_all_fields));
+                if(TextUtils.isEmpty(enteredUsername) && TextUtils.isEmpty(enteredEmail) && TextUtils.isEmpty(enteredPassword)
+                        && TextUtils.isEmpty(enteredDepartment) && TextUtils.isEmpty(enteredSemester) && TextUtils.isEmpty(enteredPhoneNumber)){
+                    displayError.setText(R.string.must_fill_all_fields);
+//                    Helper.displayErrorMessage(RegistrationActivity.this, getString(R.string.fill_all_fields));
+                }
+                else
+                {
+                    if(TextUtils.isEmpty(enteredUsername) || TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)
+                            || TextUtils.isEmpty(enteredAddress) || TextUtils.isEmpty(enteredPhoneNumber)){
+                        displayError.setText(R.string.fill_all_fields);
+                    }
+
+                    else if(!Helper.isValidEmail(enteredEmail)){
+                        displayError.setText(R.string.invalid_email);
+                    }
+
+                    else if(enteredUsername.length() < Helper.MINIMUM_LENGTH){
+                        displayError.setText(R.string.maximum_length);
+                    }
+                    else if(enteredPassword.length() < Helper.MINIMUM_LENGTH){
+                        displayError.setText(R.string.maximum_pass_length);
+                    }
+                    else if(enteredPhoneNumber.length() != Helper.MINIMUM_PHONE ){
+                        displayError.setText(R.string.invalid_phone);
+                    }
+                    else if(!Helper.isValidPhone(enteredPhoneNumber)){
+                        displayError.setText(R.string.invalid_phone);
+                    }
+                    else
+                    {
+                        displayError.setText(" ");
+                        Log.d(TAG, enteredUsername + enteredEmail + enteredPassword + enteredAddress + enteredPhoneNumber);
+                        //Add new user to the server
+                        addNewUserToRemoteServer(enteredUsername, enteredEmail, enteredPassword, enteredAddress, enteredPhoneNumber);
+                    }
                 }
 
-                if(!Helper.isValidEmail(enteredEmail)){
-                    Helper.displayErrorMessage(RegistrationActivity.this, getString(R.string.invalid_email));
-                }
-
-                if(enteredUsername.length() < Helper.MINIMUM_LENGTH || enteredPassword.length() < Helper.MINIMUM_LENGTH){
-                    Helper.displayErrorMessage(RegistrationActivity.this,getString(R.string.maximum_length));
-                }
-                Log.d(TAG, enteredUsername + enteredEmail + enteredPassword + enteredAddress + enteredPhoneNumber);
-                //Add new user to the server
-                addNewUserToRemoteServer(enteredUsername, enteredEmail, enteredPassword, enteredAddress, enteredPhoneNumber);
             }
         });
     }

@@ -53,6 +53,7 @@ public class Helper {
     public static final String CLIENT_ID = "";
 
     public static final int MINIMUM_LENGTH = 5;
+    public static final int MINIMUM_PHONE = 11;
 
 
     public static void displayErrorMessage(Context context, String message){
@@ -60,7 +61,19 @@ public class Helper {
     }
 
     public static boolean isValidEmail(String email){
-        return email.contains("@");
+        if(email.contains("@uog.edu.pk"))
+            return true;
+        else if(email.contains("@UOG.EDU.PK"))
+            return true;
+
+        return false;
+    }
+
+    public static boolean isValidPhone(String phone){
+        if(phone.startsWith("03"))
+            return true;
+
+        return false;
     }
 
     public static String dateFormatting(String dateInString){

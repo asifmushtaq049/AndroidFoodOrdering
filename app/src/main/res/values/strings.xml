@@ -16,14 +16,17 @@
     <string name="address_hint">Password</string>
 
     <string name="login_page">Login Page</string>
-    <string name="fill_all_fields">All fields must be filled</string>
-    <string name="invalid_email">You have entered invalid email</string>
-    <string name="failed_login">Login failed!! Try again</string>
+    <string name="must_fill_all_fields">All Fields Are Empty! </string>
+    <string name="fill_all_fields">Please Fill All Fields! </string>
+    <string name="invalid_email">You Have Entered Invalid Email!</string>
+    <string name="failed_login">Login Failed!! Try Again</string>
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="terms_of_service">By signing up you agree to the terms of service and privacy policy</string>
     <string name="sign_in_account">Create new account</string>
     <string name="failed_registration">User registration failed. Please try again</string>
-    <string name="maximum_length">Name or Username length must be greater than 5</string>
+    <string name="maximum_length">Full Name Length Must Be Greater Than 5</string>
+    <string name="maximum_pass_length">Password Length Must Be Greater Than 5</string>
+    <string name="invalid_phone">Phone No is Not Valid!</string>
     <string name="title_activity_main">Main Cafeteria</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

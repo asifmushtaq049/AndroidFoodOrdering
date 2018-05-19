@@ -77,16 +77,30 @@ public class LoginActivity extends BaseCompatActivity {
 
                 String enteredEmail = emailInput.getText().toString().trim();
                 String enteredPassword = passwordInput.getText().toString().trim();
-
-                if(TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)){
-                    Helper.displayErrorMessage(LoginActivity.this, getString(R.string.fill_all_fields));
+                if(TextUtils.isEmpty(enteredEmail) && TextUtils.isEmpty(enteredPassword))
+                {
+                    errorDisplay.setText(R.string.must_fill_all_fields);
                 }
-                if(!Helper.isValidEmail(enteredEmail)){
-                    Helper.displayErrorMessage(LoginActivity.this, getString(R.string.invalid_email));
+                else
+                {
+                    if(TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)){
+                        errorDisplay.setText(R.string.fill_all_fields);
+                        //Helper.displayErrorMessage(LoginActivity.this, getString(R.string.fill_all_fields));
+                    }
+                    else if(!Helper.isValidEmail(enteredEmail)){
+                        errorDisplay.setText(R.string.invalid_email);
+                    }
+                    else if(enteredPassword.length() < Helper.MINIMUM_LENGTH){
+                        errorDisplay.setText(R.string.maximum_pass_length);
+                    }
+                    else
+                    {
+                        errorDisplay.setText(" ");
+                        //make server call for user authentication
+                        authenticateUserInRemoteServer(enteredEmail, enteredPassword);
+                    }
                 }
 
-                //make server call for user authentication
-                authenticateUserInRemoteServer(enteredEmail, enteredPassword);
             }
         });
     }
@@ -129,10 +143,16 @@ public class LoginActivity extends BaseCompatActivity {
                         startActivity(loginIntent);
                     }
                     else if(response.getLoggedIn().equals("2")){
-                        Toast.makeText(LoginActivity.this, "Your account need approval", Toast.LENGTH_LONG).show();
+                        errorDisplay.setText("Your Account Need Admin Approval");
+                        //Toast.makeText(LoginActivity.this, "Your Account Need Admin Approval", Toast.LENGTH_LONG).show();
+                    }
+                    else if(response.getLoggedIn().equals("0")){
+                        errorDisplay.setText("Email or Password is Incorrect!");
+                        //Toast.makeText(LoginActivity.this, "", Toast.LENGTH_LONG).show();
                     }
                     else{
-                        Toast.makeText(LoginActivity.this, R.string.failed_login, Toast.LENGTH_LONG).show();
+                        errorDisplay.setText("Login Failed!! Try Again Later");
+                        //Toast.makeText(LoginActivity.this, R.string.failed_login, Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

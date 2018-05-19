@@ -259,7 +259,7 @@
                 android:layout_marginBottom="@dimen/_32sdp"
                 android:text="@string/location"
                 android:textColor="@color/colorBorder"
-                android:textSize="@dimen/_12sdp"/>
+                android:textSize="@dimen/_14sdp"/>
 
 
             <LinearLayout

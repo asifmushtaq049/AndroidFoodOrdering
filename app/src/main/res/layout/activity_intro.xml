@@ -48,10 +48,9 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:text="@string/get_started"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
             android:background="@color/colorPrimary"/>
 
     </LinearLayout>
-
 
 </LinearLayout>
