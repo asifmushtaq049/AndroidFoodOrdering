@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "553876169767",
+    "firebase_url": "https://uogsmartcafe.firebaseio.com",
+    "project_id": "uogsmartcafe",
+    "storage_bucket": "uogsmartcafe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553876169767:android:82e82c7dccdf6681",
+        "android_client_info": {
+          "package_name": "com.uog.smartcafe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553876169767-d9ae9u4annrfshi6kufrd74sb9t2g1hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABsIPINDrwlnf0qhhEskfK0lExc1eruOE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
