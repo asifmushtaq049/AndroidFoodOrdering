@@ -150,13 +150,13 @@ public class CheckoutActivity extends BaseCompatActivity {
                     return;
                 }
 
-                if(paymentMethod.equals("PAY PAL")){
-                    initializePayPalPayment();
-                }else if(paymentMethod.equals("CREDIT CARD")){
-
-                }else{
-                    postCheckoutOrderToRemoteServer(String.valueOf(user.getId()), String.valueOf(checkoutOrder.size()), String.valueOf(subTotal), paymentMethod, finalList);
-                }
+                postCheckoutOrderToRemoteServer(String.valueOf(user.getId()), String.valueOf(checkoutOrder.size()), String.valueOf(subTotal), paymentMethod, finalList);
+//                if(paymentMethod.equals("PAY PAL")){
+//                    initializePayPalPayment();
+//                }else if(paymentMethod.equals("CREDIT CARD")){
+//
+//                }else{
+//                }
             }
         });
     }
@@ -262,13 +262,13 @@ public class CheckoutActivity extends BaseCompatActivity {
         };
     }
 
-    private void initializePayPalPayment(){
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(subTotal)), "USD", "Food Order", PayPalPayment.PAYMENT_INTENT_SALE);
-        Intent intent = new Intent(this, PaymentActivity.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-        startActivityForResult(intent, REQUEST_PAYMENT_CODE);
-    }
+//    private void initializePayPalPayment(){
+//        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(subTotal)), "USD", "Food Order", PayPalPayment.PAYMENT_INTENT_SALE);
+//        Intent intent = new Intent(this, PaymentActivity.class);
+//        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
+//        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
+//        startActivityForResult(intent, REQUEST_PAYMENT_CODE);
+//    }
 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
