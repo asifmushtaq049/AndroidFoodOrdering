@@ -12,8 +12,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -39,8 +43,12 @@ public class RegistrationActivity extends BaseCompatActivity {
     private EditText email;
     private EditText password;
     private EditText department;
-    private EditText semester;
+    private Spinner semester;
     private EditText phoneNumber;
+    String enteredSemester;
+    String enteredAddress;
+
+    String[] semesterTypes = {"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","repeater"};
 
 
     @Override
@@ -65,8 +73,29 @@ public class RegistrationActivity extends BaseCompatActivity {
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
         department = (EditText)findViewById(R.id.department);
-        semester = (EditText)findViewById(R.id.semester);
+        semester = (Spinner) findViewById(R.id.semester);
         phoneNumber = (EditText)findViewById(R.id.phone_number);
+
+
+        ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item,semesterTypes);
+    spinnerArrayAdapter3.setDropDownViewResource(R.layout.spinner_item);
+        semester.setAdapter(spinnerArrayAdapter3);
+
+        semester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                enteredSemester = semesterTypes[position];
+
+
+                Log.v("RegistrationActivity", "Ëntered Semester is " +enteredSemester);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         Button createAccountButton = (Button)findViewById(R.id.create_account_button);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
@@ -75,20 +104,25 @@ public class RegistrationActivity extends BaseCompatActivity {
                 String enteredUsername = username.getText().toString().trim();
                 String enteredEmail = email.getText().toString().trim();
                 String enteredPassword = password.getText().toString().trim();
-                String enteredDepartment = department.getText().toString().trim();
-                String enteredSemester = semester.getText().toString().trim();
-                String enteredAddress = enteredDepartment + ", " + enteredSemester ;
+                 String enteredDepartment = department.getText().toString().trim();
+
+                 enteredAddress = enteredDepartment + ", " + enteredSemester ;
+
                 String enteredPhoneNumber = phoneNumber.getText().toString();
 
+
+
+
+
                 if(TextUtils.isEmpty(enteredUsername) && TextUtils.isEmpty(enteredEmail) && TextUtils.isEmpty(enteredPassword)
-                        && TextUtils.isEmpty(enteredDepartment) && TextUtils.isEmpty(enteredSemester) && TextUtils.isEmpty(enteredPhoneNumber)){
+                        && TextUtils.isEmpty(enteredDepartment) && TextUtils.isEmpty(enteredPhoneNumber)){
                     displayError.setText(R.string.must_fill_all_fields);
 //                    Helper.displayErrorMessage(RegistrationActivity.this, getString(R.string.fill_all_fields));
                 }
                 else
                 {
                     if(TextUtils.isEmpty(enteredUsername) || TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)
-                            || TextUtils.isEmpty(enteredAddress) || TextUtils.isEmpty(enteredPhoneNumber)){
+                            || TextUtils.isEmpty(enteredDepartment) || TextUtils.isEmpty(enteredPhoneNumber)){
                         displayError.setText(R.string.fill_all_fields);
                     }
 
