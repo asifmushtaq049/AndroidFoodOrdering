@@ -119,6 +119,22 @@
 
             </LinearLayout>
 
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/customertype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@android:style/Widget.Holo.Spinner"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/bottom_border"
+                android:hint="C"
+                android:textColorHint="@color/colorExtra"
+                >
+
+            </android.support.v7.widget.AppCompatSpinner>
+
             <EditText
             android:id="@+id/phone_number"
             android:layout_width="match_parent"

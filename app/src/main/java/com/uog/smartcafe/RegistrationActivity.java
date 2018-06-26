@@ -44,11 +44,14 @@ public class RegistrationActivity extends BaseCompatActivity {
     private EditText password;
     private EditText department;
     private Spinner semester;
+    private Spinner customerTypeSpinner;
     private EditText phoneNumber;
     String enteredSemester;
     String enteredAddress;
+    String customerType;
 
     String[] semesterTypes = {"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","repeater"};
+    String[] customerTypes = {"Student","Teacher"};
 
 
     @Override
@@ -74,11 +77,12 @@ public class RegistrationActivity extends BaseCompatActivity {
         password = (EditText)findViewById(R.id.password);
         department = (EditText)findViewById(R.id.department);
         semester = (Spinner) findViewById(R.id.semester);
+        customerTypeSpinner = (Spinner) findViewById(R.id.customertype);
         phoneNumber = (EditText)findViewById(R.id.phone_number);
 
 
         ArrayAdapter<String> spinnerArrayAdapter3 = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item,semesterTypes);
-    spinnerArrayAdapter3.setDropDownViewResource(R.layout.spinner_item);
+        spinnerArrayAdapter3.setDropDownViewResource(R.layout.spinner_item);
         semester.setAdapter(spinnerArrayAdapter3);
 
         semester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,16 +101,38 @@ public class RegistrationActivity extends BaseCompatActivity {
             }
         });
 
+
+        ArrayAdapter<String> customerArrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item,customerTypes);
+        customerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+        customerTypeSpinner.setAdapter(customerArrayAdapter);
+
+        customerTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                  customerType  = customerTypes[position];
+
+
+                Log.v("RegistrationActivity", "Ëntered Customer  is " +customerType);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         Button createAccountButton = (Button)findViewById(R.id.create_account_button);
         createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String enteredUsername = username.getText().toString().trim();
                 String enteredEmail = email.getText().toString().trim();
                 String enteredPassword = password.getText().toString().trim();
-                 String enteredDepartment = department.getText().toString().trim();
+                String enteredDepartment = department.getText().toString().trim();
 
-                 enteredAddress = enteredDepartment + ", " + enteredSemester ;
+                enteredAddress = enteredDepartment + ", " + enteredSemester ;
 
                 String enteredPhoneNumber = phoneNumber.getText().toString();
 
@@ -162,6 +188,7 @@ public class RegistrationActivity extends BaseCompatActivity {
         params.put(Helper.PASSWORD, password);
         params.put(Helper.ADDRESS, address);
         params.put(Helper.PHONE_NUMBER, phoneNumber);
+        params.put(Helper.CUSTOMER_TYPE, customerType);
 
         GsonRequest<LoginObject> serverRequest = new GsonRequest<LoginObject>(
                 Request.Method.POST,

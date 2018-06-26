@@ -41,6 +41,7 @@ public class Helper {
     public static final String PASSWORD = "PASSWORD";
     public static final String ADDRESS = "ADDRESS";
     public static final String PHONE_NUMBER = "PHONE_NUMBER";
+    public static final String CUSTOMER_TYPE = "CUSTOMER_TYPE";
     public static final String MENU_ID = "MENU_ID";
 
     public static final String USER_DATA = "USER_DATA";
