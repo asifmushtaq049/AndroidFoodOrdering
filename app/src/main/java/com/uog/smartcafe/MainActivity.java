@@ -33,6 +33,8 @@ public class MainActivity extends BaseCompatActivity {
     private Fragment fragment = null;
     private int mCount;
 
+    String customerType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,8 @@ public class MainActivity extends BaseCompatActivity {
         fragment = new HomeFragment();
         fragmentTransaction.replace(R.id.content_main, fragment);
         fragmentTransaction.commit();
+
+        customerType = getIntent().getStringExtra("customertype");
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -133,6 +137,7 @@ public class MainActivity extends BaseCompatActivity {
 
         if (id == R.id.action_shop) {
             Intent checkoutIntent = new Intent(MainActivity.this, CartActivity.class);
+            checkoutIntent.putExtra("customertype",customerType);
             startActivity(checkoutIntent);
             return true;
         }

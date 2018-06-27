@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -21,6 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.uog.smartcafe.adapter.CheckoutAdapter;
 import com.uog.smartcafe.entities.CartObject;
 import com.uog.smartcafe.entities.LoginObject;
@@ -33,22 +35,16 @@ import com.uog.smartcafe.util.CustomSharedPreference;
 import com.uog.smartcafe.util.DrawCart;
 import com.uog.smartcafe.util.Helper;
 import com.uog.smartcafe.util.SimpleDividerItemDecoration;
-import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalService;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
 
 import org.json.JSONException;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CheckoutActivity extends BaseCompatActivity {
+public class CheckoutStudentActivity extends BaseCompatActivity {
 
-    private static final String TAG = CheckoutActivity.class.getSimpleName();
+    private static final String TAG = CheckoutStudentActivity.class.getSimpleName();
 
     private TextView orderItemCount, orderTotalAmount, orderVat, orderFullAmount, restaurantName,
             restaurantAddress, deliveryAddress;
@@ -72,11 +68,11 @@ public class CheckoutActivity extends BaseCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_checkout);
+        setContentView(R.layout.activity_student_checkout);
 
+        Toast.makeText(this, "This is for Students", Toast.LENGTH_SHORT).show();
         setTitle(getString(R.string.my_checkout));
 
-        Toast.makeText(this, "This is for Teachers", Toast.LENGTH_SHORT).show();
         config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK).clientId(Helper.CLIENT_ID);
 
         finalList = getIntent().getExtras().getString("FINAL_ORDER");
@@ -120,7 +116,7 @@ public class CheckoutActivity extends BaseCompatActivity {
         checkoutRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
         checkoutRecyclerView.setHasFixedSize(true);
 
-        CheckoutAdapter mAdapter = new CheckoutAdapter(CheckoutActivity.this, checkoutOrder);
+        CheckoutAdapter mAdapter = new CheckoutAdapter(CheckoutStudentActivity.this, checkoutOrder);
         checkoutRecyclerView.setAdapter(mAdapter);
 
 
@@ -128,7 +124,7 @@ public class CheckoutActivity extends BaseCompatActivity {
         addNewAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newAddressIntent = new Intent(CheckoutActivity.this, NewAddressActivity.class);
+                Intent newAddressIntent = new Intent(CheckoutStudentActivity.this, NewAddressActivity.class);
                 startActivity(newAddressIntent);
             }
         });
@@ -148,11 +144,11 @@ public class CheckoutActivity extends BaseCompatActivity {
             @Override
             public void onClick(View view) {
                 if(radioGroup.getCheckedRadioButtonId() < 0){
-                    Helper.displayErrorMessage(CheckoutActivity.this, "Payment option must be selected before checkout");
+                    Helper.displayErrorMessage(CheckoutStudentActivity.this, "Payment option must be selected before checkout");
                     return;
                 }
                 if(TextUtils.isEmpty(buyerDeliveryAddress)){
-                    Helper.displayErrorMessage(CheckoutActivity.this, "You must provide a delivery address before checkout");
+                    Helper.displayErrorMessage(CheckoutStudentActivity.this, "You must provide a delivery address before checkout");
                     return;
                 }
 
@@ -233,7 +229,7 @@ public class CheckoutActivity extends BaseCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        VolleySingleton.getInstance(CheckoutActivity.this).addToRequestQueue(serverRequest);
+        VolleySingleton.getInstance(CheckoutStudentActivity.this).addToRequestQueue(serverRequest);
     }
 
     private Response.Listener<SuccessObject> createRequestSuccessListener() {
@@ -247,10 +243,10 @@ public class CheckoutActivity extends BaseCompatActivity {
                         //delete paid other
                         ((CustomApplication)getApplication()).getShared().updateCartItems("");
                         //confirmation page.
-                        Intent orderIntent = new Intent(CheckoutActivity.this, OrderComfirmationActivity.class);
+                        Intent orderIntent = new Intent(CheckoutStudentActivity.this, OrderComfirmationActivity.class);
                         startActivity(orderIntent);
                     }else{
-                        Helper.displayErrorMessage(CheckoutActivity.this, "Failed to upload order to server");
+                        Helper.displayErrorMessage(CheckoutStudentActivity.this, "Failed to upload order to server");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

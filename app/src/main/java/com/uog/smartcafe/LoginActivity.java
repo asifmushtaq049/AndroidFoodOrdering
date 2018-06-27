@@ -138,6 +138,7 @@ public class LoginActivity extends BaseCompatActivity {
                         String userData = ((CustomApplication)getApplication()).getGsonObject().toJson(response);
                         ((CustomApplication)getApplication()).getShared().setUserData(userData);
 
+
                         // navigate to restaurant home
                         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(loginIntent);

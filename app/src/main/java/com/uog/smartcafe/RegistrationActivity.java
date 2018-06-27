@@ -50,7 +50,7 @@ public class RegistrationActivity extends BaseCompatActivity {
     String enteredAddress;
     String customerType;
 
-    String[] semesterTypes = {"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","repeater"};
+    String[] semesterTypes = {"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","Repeater","Not Applicable"};
     String[] customerTypes = {"Student","Teacher"};
 
 
@@ -217,9 +217,16 @@ public class RegistrationActivity extends BaseCompatActivity {
                         String userData = ((CustomApplication)getApplication()).getGsonObject().toJson(response);
                         ((CustomApplication)getApplication()).getShared().setUserData(userData);
 
+                        Log.v("USERDATA",userData);
                         // navigate to restaurant home
-                        Intent loginIntent = new Intent(RegistrationActivity.this, MainActivity.class);
-                        startActivity(loginIntent);
+
+                             Intent loginIntent = new Intent(RegistrationActivity.this, MainActivity.class);
+                             loginIntent.putExtra("customertype",customerType);
+                             startActivity(loginIntent);
+
+
+
+
                     }else if(response.getLoggedIn().equals("0")){
                         Helper.displayErrorMessage(RegistrationActivity.this, "User registration failed - Email address already exist");
                     }else{

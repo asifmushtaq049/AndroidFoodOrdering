@@ -16,6 +16,8 @@ public class Query extends DatabaseObject{
         super(context);
     }
 
+
+
     public List<FavoriteObject> listFavoriteMenu(){
         List<FavoriteObject> favoriteObject = new ArrayList<FavoriteObject>();
         String query = "select * from favorite";

@@ -40,6 +40,9 @@ public class CartActivity extends BaseCompatActivity {
     private CustomSharedPreference pref;
     private List<CartObject> orderedItems;
 
+    String customerType;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,8 @@ public class CartActivity extends BaseCompatActivity {
         orderTotalAmount = (TextView) findViewById(R.id.order_total_amount);
         RecyclerView cartRecyclerView = (RecyclerView) findViewById(R.id.cart_item);
 
+        customerType = getIntent().getStringExtra("customertype");
+
         Button backToMenuButton = (Button)findViewById(R.id.back_to_menu_button);
         backToMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +84,7 @@ public class CartActivity extends BaseCompatActivity {
                 if(orderedItems.size() > 0){
                     String finalOrderList = mGson.toJson(orderedItems);
                     checkoutIntent.putExtra("FINAL_ORDER", finalOrderList);
+                    checkoutIntent.putExtra("customertype",customerType);
                     startActivity(checkoutIntent);
                 }
             }
