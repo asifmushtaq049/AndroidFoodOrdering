@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class Helper {
 
-    public static final String PUBLIC_FOLDER = "https://uogsmartcafe.000webhostapp.com/restaurant/public/";
+    public static final String PUBLIC_FOLDER = "https://ktutorials.com/restaurant/public/";
     public static final String PATH_TO_SERVER_LOGIN = PUBLIC_FOLDER + "signin";
     public static final String PATH_TO_SERVER_REGISTRATION = PUBLIC_FOLDER + "register";
     public static final String PATH_TO_RESTAURANT_HOME = PUBLIC_FOLDER + "mobilerestuarant";

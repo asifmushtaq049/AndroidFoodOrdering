@@ -107,7 +107,7 @@ public class LoginActivity extends BaseCompatActivity {
                     }
                     else
                     {
-                        alert.dismiss();
+
                         errorDisplay.setText(" ");
                         //make server call for user authentication
                         authenticateUserInRemoteServer(enteredEmail, enteredPassword);
