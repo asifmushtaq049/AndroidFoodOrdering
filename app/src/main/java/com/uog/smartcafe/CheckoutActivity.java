@@ -66,7 +66,7 @@ public class CheckoutActivity extends BaseCompatActivity {
     String customerType;
     private double subTotal;
 
-    private static PayPalConfiguration config;
+//    private static PayPalConfiguration config;
     private static final int REQUEST_PAYMENT_CODE = 99;
 
     @Override
@@ -77,7 +77,7 @@ public class CheckoutActivity extends BaseCompatActivity {
         setTitle(getString(R.string.my_checkout));
 
         Toast.makeText(this, "This is for Teachers", Toast.LENGTH_SHORT).show();
-        config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK).clientId(Helper.CLIENT_ID);
+//        config = new PayPalConfiguration().environment(PayPalConfiguration.ENVIRONMENT_NO_NETWORK).clientId(Helper.CLIENT_ID);
 
         finalList = getIntent().getExtras().getString("FINAL_ORDER");
         Log.d(TAG, "JSON FORMAT" + finalList);
@@ -108,9 +108,9 @@ public class CheckoutActivity extends BaseCompatActivity {
         orderItemCount.setText(String.valueOf(checkoutOrder.size()));
         DrawCart drawCart = new DrawCart(this);
         subTotal = drawCart.getSubtotalAmount(checkoutOrder);
-        orderTotalAmount.setText(String.valueOf(subTotal) + "0" + "PKR");
+        orderTotalAmount.setText(String.valueOf(subTotal) + "0" + "Rs");
         orderVat.setText("0.00");
-        orderFullAmount.setText(String.valueOf(subTotal) + "0" + "PKR");
+        orderFullAmount.setText(String.valueOf(subTotal) + "0" + "Rs");
 
 
         RecyclerView checkoutRecyclerView = (RecyclerView)findViewById(R.id.checkout_item);
@@ -133,14 +133,6 @@ public class CheckoutActivity extends BaseCompatActivity {
             }
         });
 
-//        TextView addNewCardPayment = (TextView)findViewById(R.id.add_payment_method);
-//        addNewCardPayment.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent newPaymentIntent = new Intent(CheckoutActivity.this, NewPaymentActivity.class);
-//                startActivity(newPaymentIntent);
-//            }
-//        });
 
         Button placeOrderButton = (Button)findViewById(R.id.place_an_order);
         placeOrderButton.setOnClickListener(new View.OnClickListener() {
@@ -157,12 +149,7 @@ public class CheckoutActivity extends BaseCompatActivity {
                 }
 
                 postCheckoutOrderToRemoteServer(String.valueOf(user.getId()), String.valueOf(checkoutOrder.size()), String.valueOf(subTotal), paymentMethod, finalList);
-//                if(paymentMethod.equals("PAY PAL")){
-//                    initializePayPalPayment();
-//                }else if(paymentMethod.equals("CREDIT CARD")){
-//
-//                }else{
-//                }
+
             }
         });
     }
@@ -191,14 +178,8 @@ public class CheckoutActivity extends BaseCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i){
-//                    case R.id.pay_pal_payment:
-//                        paymentMethod = "PAY PAL";
-//                        break;
-//                    case R.id.credit_card_payment:
-//                        paymentMethod = "CREDIT CARD";
-//                        break;
                     case R.id.cash_on_delivery:
-                        paymentMethod = "CASH ON DELIVERY";
+                        paymentMethod = "Online Cafe Payment";
                         break;
                 }
             }
@@ -268,13 +249,6 @@ public class CheckoutActivity extends BaseCompatActivity {
         };
     }
 
-//    private void initializePayPalPayment(){
-//        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(subTotal)), "USD", "Food Order", PayPalPayment.PAYMENT_INTENT_SALE);
-//        Intent intent = new Intent(this, PaymentActivity.class);
-//        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-//        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-//        startActivityForResult(intent, REQUEST_PAYMENT_CODE);
-//    }
 
     @Override
     protected void onActivityResult (int requestCode, int resultCode, Intent data) {
@@ -302,7 +276,7 @@ public class CheckoutActivity extends BaseCompatActivity {
             Log.i("paymentExample", "The user canceled.");
         }
         else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-            Log.i("paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
+            Log.i("paymentExample", "An invalid Payment was submitted. Please see the docs.");
         }
     }
 }

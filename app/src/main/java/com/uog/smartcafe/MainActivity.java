@@ -75,10 +75,6 @@ public class MainActivity extends BaseCompatActivity {
                 } else if (id == R.id.nav_favorites) {
                     fragment = new FavoriteMenuFragment();
                 }
-//                } else if (id == R.id.nav_hot_deals) {
-//                    Intent hotDealIntent = new Intent(MainActivity.this, HotDealActvity.class);
-//                    startActivity(hotDealIntent);
-//                }
                 else if (id == R.id.nav_notification) {
                     Intent notificationIntent = new Intent(MainActivity.this, NotificationActivity.class);
                     startActivity(notificationIntent);
@@ -90,7 +86,6 @@ public class MainActivity extends BaseCompatActivity {
                 {
                     Intent complaintActivity = new Intent(MainActivity.this,ComplaintActivity.class);
                     startActivity(complaintActivity);
-
                 }
                 else if (id == R.id.nav_logout) {
                     //remove user data from shared preference
@@ -128,7 +123,7 @@ public class MainActivity extends BaseCompatActivity {
 
         if(count!=0)
         {
-            getFragmentManager().popBackStack();
+//            getFragmentManager().popBackStack();
         }
 
 //        else {
@@ -165,5 +160,4 @@ public class MainActivity extends BaseCompatActivity {
         mCount = ((CustomApplication)getApplication()).cartItemCount();
         super.onResume();
     }
-
 }

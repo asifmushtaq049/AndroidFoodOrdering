@@ -10,6 +10,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+import com.uog.smartcafe.entities.LoginObject;
+import com.uog.smartcafe.util.CustomApplication;
 import com.uog.smartcafe.util.Helper;
 
 
@@ -47,4 +50,5 @@ public class IntroActivity extends BaseCompatActivity {
         });
 
     }
+
 }

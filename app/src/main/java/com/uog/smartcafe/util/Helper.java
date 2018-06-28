@@ -86,7 +86,7 @@ public class Helper {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return new SimpleDateFormat("d MMMM, yyyy", Locale.ENGLISH).format(stringDate);
+        return new SimpleDateFormat("dd MM, yyyy", Locale.ENGLISH).format(stringDate);
     }
 
     public static boolean isUserLoggedIn(Activity activity){
