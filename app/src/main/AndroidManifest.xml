@@ -31,7 +31,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SingleMenuCategoryActivity" />
         <activity android:name=".FoodActivity" />
-        <activity android:name=".HotDealActvity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".CartActivity" />
         <activity android:name=".CheckoutActivity" />

@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uog.smartcafe.EditProfileActivity;
-import com.uog.smartcafe.HotDealActvity;
 import com.uog.smartcafe.R;
 import com.uog.smartcafe.entities.LoginObject;
 import com.uog.smartcafe.util.CustomApplication;
