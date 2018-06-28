@@ -142,6 +142,7 @@ public class LoginActivity extends BaseCompatActivity {
                         // navigate to restaurant home
                         Intent loginIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(loginIntent);
+                        finish();
                     }
                     else if(response.getLoggedIn().equals("2")){
                         errorDisplay.setText("Your Account Need Admin Approval");
@@ -178,6 +179,7 @@ public class LoginActivity extends BaseCompatActivity {
         if(userObject != null){
             Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intentMain);
+            finish();
             return true;
         }
         return false;

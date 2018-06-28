@@ -73,17 +73,17 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/minus_button"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginRight="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:textSize="@dimen/_20sdp"
-            android:gravity="center"
-            android:background="@drawable/brown_border"
-            android:textColor="@color/colorBlack"
-            android:text="@string/minus"/>
+            <Button
+                android:id="@+id/minus_button"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:background="@drawable/brown_border"
+                android:gravity="center"
+                android:text="@string/minus"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/_20sdp" />
 
         <TextView
             android:id="@+id/order_quantity"

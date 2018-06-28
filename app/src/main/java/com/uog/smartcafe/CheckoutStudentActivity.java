@@ -45,7 +45,6 @@ import java.util.Map;
 public class CheckoutStudentActivity extends BaseCompatActivity {
 
     private static final String TAG = CheckoutStudentActivity.class.getSimpleName();
-
     private TextView orderItemCount, orderTotalAmount, orderVat, orderFullAmount, restaurantName,
             restaurantAddress, deliveryAddress;
 
@@ -104,9 +103,9 @@ public class CheckoutStudentActivity extends BaseCompatActivity {
         orderItemCount.setText(String.valueOf(checkoutOrder.size()));
         DrawCart drawCart = new DrawCart(this);
         subTotal = drawCart.getSubtotalAmount(checkoutOrder);
-        orderTotalAmount.setText(String.valueOf(subTotal) + "0" + "PKR");
+        orderTotalAmount.setText(String.valueOf(subTotal) + "0" + "RS");
         orderVat.setText("0.00");
-        orderFullAmount.setText(String.valueOf(subTotal) + "0" + "PKR");
+        orderFullAmount.setText(String.valueOf(subTotal) + "0" + "RS");
 
 
         RecyclerView checkoutRecyclerView = (RecyclerView)findViewById(R.id.checkout_item);

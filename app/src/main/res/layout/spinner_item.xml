@@ -5,6 +5,5 @@
     android:layout_height="wrap_content"
     android:textColor="@color/colorWhite"
     android:padding="10dp"
-
     android:hint="Semester"
     />

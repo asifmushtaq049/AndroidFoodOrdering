@@ -253,8 +253,9 @@ public class RegistrationActivity extends BaseCompatActivity {
         String storedUser = ((CustomApplication)getApplication()).getShared().getUserData();
         LoginObject userObject = mGson.fromJson(storedUser, LoginObject.class);
         if(userObject != null){
-            Intent intentMain = new Intent(RegistrationActivity.this, MainActivity.class);
+            Intent intentMain = new Intent(RegistrationActivity.this, LoginActivity.class);
             startActivity(intentMain);
+            Toast.makeText(this, "Your Account need Admin Approval...", Toast.LENGTH_SHORT).show();
         }
     }
 }
