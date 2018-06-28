@@ -25,6 +25,7 @@ public class LoginOptionActivity extends BaseCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_option);
 
+        isUserLoggedIn();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         ActionBar actionBar = getSupportActionBar();
@@ -49,5 +50,18 @@ public class LoginOptionActivity extends BaseCompatActivity {
             }
         });
 
+    }
+
+    private boolean isUserLoggedIn(){
+        Gson mGson = ((CustomApplication)getApplication()).getGsonObject();
+        String storedUser = ((CustomApplication)getApplication()).getShared().getUserData();
+        LoginObject userObject = mGson.fromJson(storedUser, LoginObject.class);
+        if(userObject != null){
+            Intent intentMain = new Intent(LoginOptionActivity.this, MainActivity.class);
+            startActivity(intentMain);
+            finish();
+            return true;
+        }
+        return false;
     }
 }

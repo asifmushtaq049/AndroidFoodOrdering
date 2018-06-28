@@ -1,5 +1,6 @@
 package com.uog.smartcafe;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -50,6 +51,8 @@ public class RegistrationActivity extends BaseCompatActivity {
     String enteredAddress;
     String customerType;
 
+    ProgressDialog alert ;
+
     String[] semesterTypes = {"1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","Repeater","Not Applicable"};
     String[] customerTypes = {"Student","Teacher"};
 
@@ -60,6 +63,10 @@ public class RegistrationActivity extends BaseCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        alert = new ProgressDialog(RegistrationActivity.this);
+        alert.setTitle("Sign Up");
+        alert.setMessage("Registering");
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -127,6 +134,7 @@ public class RegistrationActivity extends BaseCompatActivity {
             @Override
             public void onClick(View view) {
 
+                alert.show();
                 String enteredUsername = username.getText().toString().trim();
                 String enteredEmail = email.getText().toString().trim();
                 String enteredPassword = password.getText().toString().trim();
@@ -143,6 +151,7 @@ public class RegistrationActivity extends BaseCompatActivity {
                 if(TextUtils.isEmpty(enteredUsername) && TextUtils.isEmpty(enteredEmail) && TextUtils.isEmpty(enteredPassword)
                         && TextUtils.isEmpty(enteredDepartment) && TextUtils.isEmpty(enteredPhoneNumber)){
                     displayError.setText(R.string.must_fill_all_fields);
+                    alert.dismiss();
 //                    Helper.displayErrorMessage(RegistrationActivity.this, getString(R.string.fill_all_fields));
                 }
                 else
@@ -154,22 +163,28 @@ public class RegistrationActivity extends BaseCompatActivity {
 
                     else if(!Helper.isValidEmail(enteredEmail)){
                         displayError.setText(R.string.invalid_email);
+                        alert.dismiss();
                     }
 
                     else if(enteredUsername.length() < Helper.MINIMUM_LENGTH){
                         displayError.setText(R.string.maximum_length);
+                        alert.dismiss();
                     }
                     else if(enteredPassword.length() < Helper.MINIMUM_LENGTH){
                         displayError.setText(R.string.maximum_pass_length);
+                        alert.dismiss();
                     }
                     else if(enteredPhoneNumber.length() != Helper.MINIMUM_PHONE ){
                         displayError.setText(R.string.invalid_phone);
+                        alert.dismiss();
                     }
                     else if(!Helper.isValidPhone(enteredPhoneNumber)){
                         displayError.setText(R.string.invalid_phone);
+                        alert.dismiss();
                     }
                     else
                     {
+
                         displayError.setText(" ");
                         Log.d(TAG, enteredUsername + enteredEmail + enteredPassword + enteredAddress + enteredPhoneNumber);
                         //Add new user to the server
@@ -211,6 +226,8 @@ public class RegistrationActivity extends BaseCompatActivity {
             @Override
             public void onResponse(LoginObject response) {
                 try {
+
+                    alert.dismiss();
                     Log.d(TAG, "Json Response " + response.getLoggedIn());
                     if(response.getLoggedIn().equals("1")){
                         //save login data to a shared preference
@@ -240,6 +257,7 @@ public class RegistrationActivity extends BaseCompatActivity {
     }
 
     private Response.ErrorListener createRequestErrorListener() {
+        alert.dismiss();
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -249,6 +267,8 @@ public class RegistrationActivity extends BaseCompatActivity {
     }
 
     private void isUserLoggedIn(){
+
+        alert.dismiss();
         Gson mGson = ((CustomApplication)getApplication()).getGsonObject();
         String storedUser = ((CustomApplication)getApplication()).getShared().getUserData();
         LoginObject userObject = mGson.fromJson(storedUser, LoginObject.class);

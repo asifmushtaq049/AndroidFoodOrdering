@@ -29,6 +29,7 @@ public class Helper {
     public static final String PATH_TO_MENU_ITEM_BY_CATEGORY = PUBLIC_FOLDER + "mobilemenuitem";
     public static final String PATH_TO_PLACE_ORDER = PUBLIC_FOLDER + "placeorder";
     public static final String PATH_TO_ALL_ORDER = PUBLIC_FOLDER + "allorders";
+    public static final String PATH_TO_SEND_COMPLAINT = PUBLIC_FOLDER + "placecomplaint";
 
 
     public static final String NEW_ACCOUNT = "Don't have an account yet?";

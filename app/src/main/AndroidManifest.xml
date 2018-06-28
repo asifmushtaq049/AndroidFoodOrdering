@@ -15,17 +15,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".IntroActivity" >
+        <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".LoginOptionActivity" >
-
-        </activity>
+        <activity android:name=".LoginOptionActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity
@@ -63,7 +60,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".OrderListActivity"></activity>
+        <activity android:name=".OrderListActivity" />
+        <activity android:name=".ComplaintActivity"></activity>
     </application>
 
 </manifest>

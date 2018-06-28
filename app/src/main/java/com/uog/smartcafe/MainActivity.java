@@ -55,6 +55,7 @@ public class MainActivity extends BaseCompatActivity {
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragment = new HomeFragment();
         fragmentTransaction.replace(R.id.content_main, fragment);
+        fragmentTransaction.addToBackStack("home");
         fragmentTransaction.commit();
 
         customerType = getIntent().getStringExtra("customertype");
@@ -84,7 +85,14 @@ public class MainActivity extends BaseCompatActivity {
                 }
                 else if (id == R.id.nav_profile) {
                     fragment = new ProfileFragment();
-                }else if (id == R.id.nav_logout) {
+                }
+                else if (id == R.id.nav_complaint)
+                {
+                    Intent complaintActivity = new Intent(MainActivity.this,ComplaintActivity.class);
+                    startActivity(complaintActivity);
+
+                }
+                else if (id == R.id.nav_logout) {
                     //remove user data from shared preference
                     SharedPreferences mShared = ((CustomApplication)getApplication()).getShared().getInstanceOfSharedPreference();
                     mShared.edit().clear().apply();
@@ -97,6 +105,7 @@ public class MainActivity extends BaseCompatActivity {
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.content_main, fragment);
+                fragmentTransaction.addToBackStack("frag");
                 transaction.commit();
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -113,6 +122,13 @@ public class MainActivity extends BaseCompatActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }
+
+            int count = getFragmentManager().getBackStackEntryCount();
+
+        if(count!=0)
+        {
+            getFragmentManager().popBackStack();
         }
 
 //        else {

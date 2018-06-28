@@ -1,5 +1,6 @@
 package com.uog.smartcafe;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class LoginActivity extends BaseCompatActivity {
     private TextView signInformation;
     private EditText emailInput;
     private EditText passwordInput;
+    ProgressDialog alert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,11 @@ public class LoginActivity extends BaseCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+        alert = new ProgressDialog(LoginActivity.this);
+        alert.setTitle("LogIn");
+        alert.setMessage("Loggin In");
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -75,26 +82,32 @@ public class LoginActivity extends BaseCompatActivity {
             @Override
             public void onClick(View view) {
 
+                alert.show();
                 String enteredEmail = emailInput.getText().toString().trim();
                 String enteredPassword = passwordInput.getText().toString().trim();
                 if(TextUtils.isEmpty(enteredEmail) && TextUtils.isEmpty(enteredPassword))
                 {
+                    alert.dismiss();
                     errorDisplay.setText(R.string.must_fill_all_fields);
                 }
                 else
                 {
                     if(TextUtils.isEmpty(enteredEmail) || TextUtils.isEmpty(enteredPassword)){
                         errorDisplay.setText(R.string.fill_all_fields);
+                        alert.dismiss();
                         //Helper.displayErrorMessage(LoginActivity.this, getString(R.string.fill_all_fields));
                     }
                     else if(!Helper.isValidEmail(enteredEmail)){
                         errorDisplay.setText(R.string.invalid_email);
+                        alert.dismiss();
                     }
                     else if(enteredPassword.length() < Helper.MINIMUM_LENGTH){
+                        alert.dismiss();
                         errorDisplay.setText(R.string.maximum_pass_length);
                     }
                     else
                     {
+                        alert.dismiss();
                         errorDisplay.setText(" ");
                         //make server call for user authentication
                         authenticateUserInRemoteServer(enteredEmail, enteredPassword);
@@ -131,6 +144,8 @@ public class LoginActivity extends BaseCompatActivity {
             @Override
             public void onResponse(LoginObject response) {
                 try {
+
+                    alert.dismiss();
                     Log.d(TAG, "Json Response " + response.getLoggedIn());
 
                     if(response.getLoggedIn().equals("1")){
@@ -167,6 +182,7 @@ public class LoginActivity extends BaseCompatActivity {
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                alert.dismiss();
                 error.printStackTrace();
             }
         };
@@ -177,6 +193,7 @@ public class LoginActivity extends BaseCompatActivity {
         String storedUser = ((CustomApplication)getApplication()).getShared().getUserData();
         LoginObject userObject = mGson.fromJson(storedUser, LoginObject.class);
         if(userObject != null){
+            alert.dismiss();
             Intent intentMain = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intentMain);
             finish();
