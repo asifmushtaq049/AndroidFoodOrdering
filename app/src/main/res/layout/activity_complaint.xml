@@ -65,7 +65,7 @@
             android:layout_marginTop="@dimen/_24sdp"
             android:paddingBottom="@dimen/_16sdp"
             android:paddingTop="@dimen/_16sdp"
-            android:text="@string/edit_user_profile"
+            android:text="Register Complaint"
             android:textAllCaps="true"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/_14sdp"

@@ -8,14 +8,16 @@ public class LoginObject {
     private String email;
     private String address;
     private String phone;
+    private String balance;
     private String loggedIn;
 
-    public LoginObject(int id, String username, String email, String address, String phone, String loggedIn) {
+    public LoginObject(int id, String username, String email, String address, String phone ,String  balance ,String loggedIn) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.address = address;
         this.phone = phone;
+        this.balance = balance;
         this.loggedIn = loggedIn;
     }
 
@@ -29,6 +31,10 @@ public class LoginObject {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getBalance() {
+        return balance;
     }
 
     public String getAddress() {

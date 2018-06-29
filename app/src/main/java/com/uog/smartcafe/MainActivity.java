@@ -118,19 +118,12 @@ public class MainActivity extends BaseCompatActivity {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-
-            int count = getFragmentManager().getBackStackEntryCount();
-
-        if(count!=0)
+        else
         {
-//            getFragmentManager().popBackStack();
+            MainActivity.this.finish();
         }
 
-//        else {
-//            //super.onBackPressed();
-//            Intent optionIntent = new Intent(MainActivity.this, LoginOptionActivity.class);
-//            startActivity(optionIntent);
-//        }
+
     }
 
     @Override

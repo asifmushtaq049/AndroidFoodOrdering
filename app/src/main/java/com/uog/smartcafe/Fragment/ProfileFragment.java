@@ -34,34 +34,13 @@ public class ProfileFragment extends Fragment {
         TextView profileAddress = (TextView)view.findViewById(R.id.profile_address);
         TextView profilePhone = (TextView)view.findViewById(R.id.profile_phone_number);
         TextView profileEmail = (TextView)view.findViewById(R.id.profile_email_adress);
-        TextView profileBalance = (TextView)view.findViewById(R.id.profile_account_balance);
 
         LoginObject loginUser = ((CustomApplication)getActivity().getApplication()).getLoginUser();
         profileName.setText(loginUser.getUsername());
         profileAddress.setText(loginUser.getAddress());
         profilePhone.setText(loginUser.getPhone());
         profileEmail.setText(loginUser.getEmail());
-//        profileBalance.setText(loginUser.getBalance());
 
-
-
-        Button editProfile = (Button)view.findViewById(R.id.edit_profile);
-        editProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent editIntent = new Intent(getActivity(), EditProfileActivity.class);
-                startActivity(editIntent);
-            }
-        });
-
-//        Button editCart = (Button)view.findViewById(R.id.edit_cart);
-//        editCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent hotDealIntent = new Intent(getActivity(), HotDealActvity.class);
-//                startActivity(hotDealIntent);
-//            }
-//        });
 
         return view;
     }

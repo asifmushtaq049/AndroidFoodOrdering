@@ -185,6 +185,7 @@ public class RegistrationActivity extends BaseCompatActivity {
                     else
                     {
 
+
                         displayError.setText(" ");
                         Log.d(TAG, enteredUsername + enteredEmail + enteredPassword + enteredAddress + enteredPhoneNumber);
                         //Add new user to the server
@@ -237,12 +238,10 @@ public class RegistrationActivity extends BaseCompatActivity {
                         Log.v("USERDATA",userData);
                         // navigate to restaurant home
 
-                             Intent loginIntent = new Intent(RegistrationActivity.this, MainActivity.class);
-                             loginIntent.putExtra("customertype",customerType);
+                             Intent loginIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                             //loginIntent.putExtra("customertype",customerType);
                              startActivity(loginIntent);
-
-
-
+                        Toast.makeText(RegistrationActivity.this, "Your account need admin approval", Toast.LENGTH_SHORT).show();
 
                     }else if(response.getLoggedIn().equals("0")){
                         Helper.displayErrorMessage(RegistrationActivity.this, "User registration failed - Email address already exist");
